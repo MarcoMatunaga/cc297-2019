@@ -1,0 +1,8 @@
+&PAR_mesh
+ imax = 41
+ jmax = 12
+ ITE = 31
+ ILE = 11
+ XSF = 1.25
+ YSF = 1.25
+/

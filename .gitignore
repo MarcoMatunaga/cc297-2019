@@ -1,3 +1,6 @@
+#tecplot files
+*.dat
+
 # Prerequisites
 *.d
 
