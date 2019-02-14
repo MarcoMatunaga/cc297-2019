@@ -1,8 +1,9 @@
 subroutine mesh_project1
-    use vars_mesh
+    use vars
     implicit none
     integer(4)                              :: i,j
-    
+    real(8)                                 :: Deltax
+
     Deltax = 1.0d0/(ITE-ILE)
     
     do j = 1, jmax
@@ -38,7 +39,7 @@ subroutine mesh_project1
 end subroutine mesh_project1
 
 ! subroutine cartesian_mesh(Length,Height)
-!     use vars_mesh
+!     use vars
 !     implicit none
 !     integer(4)          :: i,j
 !     real(8)             :: Deltax, Deltay
@@ -77,7 +78,7 @@ end subroutine mesh_project1
 ! end subroutine cartesian_mesh
 
 ! subroutine read_mesh
-!     use vars_mesh
+!     use vars
 !     implicit none
 
 !     open(1,file='mesh') 

@@ -6,3 +6,11 @@
  XSF = 1.25
  YSF = 1.25
 /
+
+&PAR_FLow
+ u_inf = 1.0
+/
+
+&PAR_geometry
+ t = 0.05
+/

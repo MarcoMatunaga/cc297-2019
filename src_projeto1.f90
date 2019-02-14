@@ -1,8 +1,12 @@
 program projeto1
-    use vars_mesh
+    use vars
     use output_routines_proj1
     implicit none
+
     namelist /PAR_mesh/ imax, jmax, ITE, ILE, XSF, YSF
+    namelist /PAR_Flow/ u_inf
+    namelist /PAR_Geometry/ t
+
     open(2,file='inputs_proj1')
     read(2,PAR_mesh)
     close(2)

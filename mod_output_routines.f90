@@ -248,7 +248,7 @@ module output_routines_proj1
     contains
 
     subroutine output_proj1 
-        use vars_mesh
+        use vars
         implicit none
         character (len=100) :: fname = '.dat'
         integer(4)          :: i,j
@@ -256,11 +256,11 @@ module output_routines_proj1
         open(3,file='mesh'//trim(fname))
       
         write(3,*) 'TITLE = "Projeto1" '
-        write(3,*) 'VARIABLES = "X" "Y" '
+        write(3,*) 'VARIABLES = "X" "Y" "phi" '
         write(3,*) 'ZONE I = ', imax, ' J =', jmax, ' DATAPACKING = POINT' 
         do j = 1, jmax
             do i = 1, imax
-                write(3,'(15ES20.10)') meshx(i,j), meshy(i,j)
+                write(3,'(15ES20.10)') meshx(i,j), meshy(i,j), phi(i,j)
             end do
         end do
       
