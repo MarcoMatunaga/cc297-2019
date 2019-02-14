@@ -17,7 +17,7 @@ subroutine mesh_project1
             meshx(i,j) = meshx(i-1,j) + ( meshx(i-1,j) - meshx(i-2,j) )*XSF
         end do 
 
-        do i = 1, ILE - 1
+        do i = ILE - 1, 1, -1
             ! mesh from the inlet boundary to trailing edge  
             meshx(i,j) = meshx(i+1,j) + ( meshx(i+1,j) - meshx(i+2,j) )*XSF
         end do
