@@ -14,6 +14,10 @@ real(8),dimension(:,:),allocatable      :: phi
 ! geometry variables
 real(8)                                 :: t
 
+!
+integer(4)                              :: max_iter, which_method
+real(8)                                 :: conv, N, residue, max_residue
+
 contains
 
     subroutine allocate_vars
