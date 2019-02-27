@@ -21,7 +21,7 @@ subroutine residue_calc
             ! update the solution 
             phi(i,j) = phi(i,j) - residue/N
 
-            if(residue > max_residue) max_residue = log10(residue)
+            if(abs(residue) > max_residue) max_residue = log10(abs(residue))
 
         end do 
     end do

@@ -9,11 +9,11 @@
 
 &PAR_Method
  which_method = 1
- conv = -5.00
- max_iter = 10000
+ conv = -15.00
+ max_iter = 20000
 /    
 
-&PAR_low
+&PAR_Flow
  u_inf = 1.0
 /
 

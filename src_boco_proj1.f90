@@ -28,11 +28,12 @@ subroutine boco_proj1
     ! bottom boundary
     j = 1
     do i = 1, imax
-        phi(i,j) = 0.0d0 
+        phi(i,j) = phi(i,j+1) 
     end do
+
     ! airfoil boundary
     do i = ILE, ITE
-        phi(i,j) = u_inf*(2*t - 4*t*meshx(i,j))
-    end do
+        phi(i,j) = phi(i,j+1) - (meshy(i,j+1) - meshy(i,j))*(u_inf*(2*t - 4*t*meshx(i,j)))
+    end do 
 
 end subroutine boco_proj1

@@ -1,4 +1,4 @@
-subroutine in_co_proj1
+subroutine inco_proj1
     use vars
     implicit none
     integer(4)      :: i,j
@@ -10,4 +10,4 @@ subroutine in_co_proj1
         end do 
     end do
 
-end subroutine in_co_proj1
+end subroutine inco_proj1

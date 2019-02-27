@@ -4,14 +4,13 @@ program projeto1
     implicit none
     integer(4)           :: iter
 
-    iter = 0
-
     namelist /PAR_mesh/ imax, jmax, ITE, ILE, XSF, YSF
     namelist /PAR_Method/ which_method, conv, max_iter 
     namelist /PAR_Flow/ u_inf
     namelist /PAR_Geometry/ t
 
-    max_residue = -100.0d0
+    max_residue = 1.0d0
+    iter = 0
 
     open(2,file='inputs_proj1')
     read(2,PAR_mesh)
@@ -22,11 +21,15 @@ program projeto1
 
     call allocate_vars
     call mesh_project1
+    call inco_proj1
+    call boco_proj1
 
-    do while(max_residue <= conv .or. iter > max_iter)
+    do while(max_residue >= conv .and. iter < max_iter)
         
         call residue_calc
+        call boco_proj1
         iter = iter + 1
+        print *, iter, max_residue
 
     end do
 

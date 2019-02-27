@@ -250,17 +250,40 @@ module output_routines_proj1
     subroutine output_proj1 
         use vars
         implicit none
-        character (len=100) :: fname = '.dat'
-        integer(4)          :: i,j
+        character (len=100)             :: fname = '.dat'
+        integer(4)                      :: i,j
+        reaL(8), dimension(imax,jmax)   :: u,v
+
+        do j = 1, jmax
+            do i = 1, imax - 1
+                u(i,j) = (phi(i+1,j) - phi(i,j))/(meshx(i+1,j)-meshx(i,j))
+            end do
+        end do
+
+        i = imax
+        do j = 1, jmax
+                u(i,j) = (phi(i,j) - phi(i-1,j))/(meshx(i,j)-meshx(i-1,j))
+        end do 
+
+        do j = 1, jmax - 1
+            do i = 1, imax 
+                v(i,j) = (phi(i,j+1) - phi(i,j))/(meshy(i,j+1)-meshy(i,j))
+            end do
+        end do
+
+        j = jmax
+        do i = 1, imax
+                v(i,j) = (phi(i,j) - phi(i,j-1))/(meshy(i,j)-meshy(i,j-1))
+        end do 
 
         open(3,file='mesh'//trim(fname))
       
         write(3,*) 'TITLE = "Projeto1" '
-        write(3,*) 'VARIABLES = "X" "Y" "phi" '
+        write(3,*) 'VARIABLES = "X" "Y" "phi" "u" "v" '
         write(3,*) 'ZONE I = ', imax, ' J =', jmax, ' DATAPACKING = POINT' 
         do j = 1, jmax
             do i = 1, imax
-                write(3,'(15ES20.10)') meshx(i,j), meshy(i,j), phi(i,j)
+                write(3,'(15ES20.10)') meshx(i,j), meshy(i,j), phi(i,j), u(i,j), v(i,j)
             end do
         end do
       
