@@ -253,28 +253,74 @@ module output_routines_proj1
         character (len=100)             :: fname = '.dat'
         integer(4)                      :: i,j
         reaL(8), dimension(imax,jmax)   :: u,v
+        real(8)                         :: dx, dy
 
-        do j = 1, jmax
-            do i = 1, imax - 1
-                u(i,j) = (phi(i+1,j) - phi(i,j))/(meshx(i+1,j)-meshx(i,j))
+        do j = 2, jmax - 1
+            do i = 2, imax - 1
+                u(i,j) = (phi(i+1,j) - phi(i-1,j))/(meshx(i+1,j)-meshx(i-1,j))
+                v(i,j) = (phi(i,j+1) - phi(i,j-1))/(meshy(i,j+1)-meshy(i,j-1))
             end do
         end do
 
-        i = imax
-        do j = 1, jmax
-                u(i,j) = (phi(i,j) - phi(i-1,j))/(meshx(i,j)-meshx(i-1,j))
-        end do 
+        ! calcula pontos interiores a fronteira esquerda ao perfil
 
-        do j = 1, jmax - 1
-            do i = 1, imax 
-                v(i,j) = (phi(i,j+1) - phi(i,j))/(meshy(i,j+1)-meshy(i,j))
-            end do
+        do j = 2, jmax-1
+            dx = (meshx(2,j) - meshx(1,j))
+            dy = (meshy(1,j+1) - meshy(1,j-1))
+            u(1,j) = (phi(2,j) - phi(1,j))/dx
+            v(1,j) = (phi(1,j+1) - phi(1,j-1))/dy
         end do
 
-        j = jmax
-        do i = 1, imax
-                v(i,j) = (phi(i,j) - phi(i,j-1))/(meshy(i,j)-meshy(i,j-1))
-        end do 
+        ! calcula velocidade pontos interiores a fronteira superior
+    
+        do i=2,imax-1
+            dx = (meshx(i+1,jmax) - meshx(i-1,jmax))
+            dy = (meshy(i,jmax) - meshy(i,jmax-1))
+            u(i,j) = (phi(i+1,jmax) - phi(i-1,jmax))/dx
+            v(i,j) = (phi(i,jmax) - phi(i,jmax-1))/dy
+        end do
+    
+        ! calcula velocidade pontos interiores a fronteira direita ao perfil
+
+        do j = 2, jmax - 1
+            dx = (meshx(imax,j) - meshx(imax-1,j) )
+            dy = (meshy(imax,j+1) - meshy(imax,j-1) )
+            u(imax,j) = (phi(imax,j) - phi(imax-1,j))/dx
+            v(imax,j) = (phi(imax,j+1) - phi(imax,j-1))/dy
+        end do
+        
+        ! calcula da velocidade no perfil
+        ! perfil entre j=1 e j=2
+        
+        j = 1
+        do i=2,imax-1
+            dx = (meshx(i+1,1) - meshx(i-1,1))
+            dy = (meshy(i,2) - meshy(i,1))
+            u(i,1) = (phi(i+1,1) - phi(i-1,1))/dx
+            v(i,1) = (phi(i,2) - phi(i,1))/dy
+        end do
+        
+        ! calcula nos vertices da malha
+    
+        dx = meshx(2,jmax) - meshx(1,jmax)
+        dy = meshy(1,jmax) - meshy(1,jmax-1)
+        u(1,jmax) = (phi(2,jmax) - phi(1,jmax))/dx
+        v(1,jmax) = (phi(1,jmax) - phi(1,jmax-1))/dy
+
+        dx = meshx(imax-2,jmax) - meshx(imax-1,jmax)
+        dy = meshy(imax,jmax) - meshy(imax,jmax-1)
+        u(imax,jmax) = (phi(imax-2,jmax) - phi(imax-1,jmax))/dx
+        v(imax,jmax) = (phi(imax-1,jmax) - phi(imax-1,jmax-1))/dy
+
+        dx = meshx(2,1) - meshx(1,1)
+        dy = meshy(1,2) - meshy(1,1)
+        u(1,1) = u(2,1) - u(1,1)/dx
+        v(1,1) = v(1,2) - v(1,1)/dy
+
+        dx = meshx(imax-1,1) - meshx(imax,1)
+        dy = meshy(imax,2) - meshy(imax,1)
+        u(imax,1) = dabs((phi(imax,1) - phi(imax-1,1))/dx)
+        v(imax,1) = dabs((phi(imax,2) - phi(imax,1))/dy)
 
         open(3,file='mesh'//trim(fname))
       

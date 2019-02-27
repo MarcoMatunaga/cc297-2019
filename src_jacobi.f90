@@ -1,18 +1,26 @@
-subroutine jacobi(d_x,d_y,Nj)
-    use vars
+subroutine jacobi(d_x,d_y,residue_cp,c_cp)
     implicit none
-    real(8), intent(in)         :: d_x, d_y
-    real(8), intent(out)        :: Nj
+    real(8), intent(in)     :: d_x, d_y, residue_cp
+    real(8), intent(out)    :: c_cp
+    real(8)                 :: Nj
 
-    Nj = - 2.0d0/d_x**2.0d0 - 2.0d0/d_y**2.0d0 
+    Nj = -2.0d0/(d_x**2.0d0) -2.0d0/(d_y**2.0d0)
+    c_cp = -residue_cp/Nj
 
 end subroutine jacobi
 
-! subroutine Gauss_Seidel(args)
-!     implicit none
-!     real :: args
-    
-! end subroutine Gauss_Seidel
+subroutine Gauss_Seidel(d_x,d_y,px,py,residue_cp,c_cp)
+    use vars
+    implicit none
+    real(8), intent(in)         :: d_x, d_y, residue_cp, px, py
+    real(8), intent(out)        :: c_cp
+    real(8)                     :: Nj, Ngs
+
+    Nj   = -2.0d0/d_x**2.0d0 -2.0d0/d_y**2.0d0
+    Ngs  = -residue_cp -px/d_x**2.0d0 -py/d_y**2.0d0
+    c_cp = Ngs/Nj
+
+end subroutine Gauss_Seidel
 
 ! subroutine SOR(args)
 !     implicit none

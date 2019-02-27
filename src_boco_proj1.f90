@@ -8,32 +8,32 @@ subroutine boco_proj1
     !* and let only the airfoil conditions
     
     ! upper boundary
-    j = jmax
-    do i = 1, imax
-        phi(i,j) = u_inf*meshx(i,j) 
-    end do 
+    ! j = jmax
+    ! do i = 1, imax
+    !     phi(i,j) = u_inf*meshx(i,j) 
+    ! end do 
 
-    ! inlet boundary 
-    i = 1
-    do j = 1, jmax
-        phi(i,j) = u_inf*meshx(i,j) 
-    end do
+    ! ! inlet boundary 
+    ! i = 1
+    ! do j = 1, jmax
+    !     phi(i,j) = u_inf*meshx(i,j) 
+    ! end do
 
-    ! outlet boundary
-    i = imax
-    do j = 1, jmax
-        phi(i,j) = u_inf*meshx(i,j) 
-    end do
+    ! ! outlet boundary
+    ! i = imax
+    ! do j = 1, jmax
+    !     phi(i,j) = u_inf*meshx(i,j) 
+    ! end do
 
-    ! bottom boundary
-    j = 1
-    do i = 1, imax
-        phi(i,j) = phi(i,j+1) 
-    end do
+    ! ! bottom boundary
+     j = 1
+     do i = 1, imax
+         phi(i,j) = phi(i,j+1) 
+     end do
 
     ! airfoil boundary
     do i = ILE, ITE
-        phi(i,j) = phi(i,j+1) - (meshy(i,j+1) - meshy(i,j))*(u_inf*(2*t - 4*t*meshx(i,j)))
+        phi(i,j) = phi(i,j+1) - (meshy(i,j+1) - meshy(i,j))*u_inf*(2*t - 4*t*meshx(i,j))
     end do 
 
 end subroutine boco_proj1
