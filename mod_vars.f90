@@ -15,6 +15,9 @@ real(8),dimension(:,:),allocatable      :: phi
 real(8)                                 :: t
 
 !
+real(8)                                 :: r
+
+!
 integer(4)                              :: max_iter, which_method
 real(8)                                 :: conv, N, residue, max_residue
 

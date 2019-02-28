@@ -5,7 +5,7 @@ program projeto1
     integer(4)           :: iter
 
     namelist /PAR_mesh/ imax, jmax, ITE, ILE, XSF, YSF
-    namelist /PAR_Method/ which_method, conv, max_iter 
+    namelist /PAR_Method/ which_method, r, conv, max_iter 
     namelist /PAR_Flow/ u_inf
     namelist /PAR_Geometry/ t
 

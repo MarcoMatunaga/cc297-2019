@@ -23,6 +23,7 @@ max_residue = -1.0d0
             ! call the relaxation method
             if (which_method == 1) call jacobi(delta_x,delta_y,residue,c(i,j))
             if (which_method == 2) call gauss_seidel(delta_x,delta_y,c(i-1,j),c(i,j-1),residue,c(i,j)) 
+            if (which_method == 3) call SOR(delta_x,delta_y,c(i-1,j),c(i,j-1),residue,c(i,j)) 
 
             ! update the solution 
 
