@@ -27,7 +27,7 @@ max_residue = -1.0d0
 
             ! update the solution 
 
-            if(dabs(residue) > max_residue) max_residue = log10(dabs(residue))
+            if(dabs(residue) > max_residue) max_residue = dabs(residue)
 
         end do 
     end do

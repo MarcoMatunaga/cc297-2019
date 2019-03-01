@@ -251,9 +251,17 @@ module output_routines_proj1
         use vars
         implicit none
         character (len=100)             :: fname = '.dat'
+        character (len=100)             :: mname
         integer(4)                      :: i,j
         reaL(8), dimension(imax,jmax)   :: u,v
         real(8)                         :: dx, dy
+
+        if (which_method == 1) mname = 'Jacobi' 
+        if (which_method == 2) mname = 'GaussSeidel'
+        if (which_method == 3) mname = 'SOR'
+        if (which_method == 4) mname = 'LGS'
+        if (which_method == 5) mname = 'SLOR'
+
 
         do j = 2, jmax - 1
             do i = 2, imax - 1
@@ -322,7 +330,7 @@ module output_routines_proj1
         u(imax,1) = dabs((phi(imax,1) - phi(imax-1,1))/dx)
         v(imax,1) = dabs((phi(imax,2) - phi(imax,1))/dy)
 
-        open(3,file='mesh'//trim(fname))
+        open(3,file= trim(mname)//trim(fname))
       
         write(3,*) 'TITLE = "Projeto1" '
         write(3,*) 'VARIABLES = "X" "Y" "phi" "u" "v" '

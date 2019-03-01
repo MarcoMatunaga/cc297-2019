@@ -24,12 +24,12 @@ program projeto1
     call inco_proj1
     call boco_proj1
 
-    do while(max_residue >= conv .and. iter < max_iter)
+    do while(log10(max_residue) >= conv .and. iter < max_iter)
         
         call residue_calc
         call boco_proj1
         iter = iter + 1
-        print *, iter, max_residue
+        print *, iter, log10(max_residue)
 
     end do
 
