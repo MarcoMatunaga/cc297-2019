@@ -26,7 +26,12 @@ program projeto1
 
     do while(log10(max_residue) >= conv .and. iter < max_iter)
         
-        call residue_calc
+        if (which_method <= 3) then 
+            call residue_calc
+        else if (which_method == 4) then
+            call Line_Gauss_Seidel
+        end if
+
         call boco_proj1
         iter = iter + 1
         print *, iter, log10(max_residue)

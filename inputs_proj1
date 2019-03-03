@@ -8,7 +8,7 @@
 /
 
 &PAR_Method
- which_method = 3
+ which_method = 4
  r = 1.793
  conv = -5.00
  max_iter = 20000

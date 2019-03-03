@@ -34,10 +34,15 @@ subroutine SOR(d_x,d_y,px,py,residue_cp,c_cp)
     
 end subroutine SOR
 
-! subroutine Line_Gauss_Seidel(args)
-!     implicit none
-!     real :: args
-    
+! subroutine Line_Gauss_Seidel(d_x)
+!      implicit none
+!     real(8), intent(in)         :: d_x, d_y, residue_cp, px, py
+!     real(8), intent(out)        :: c_cp
+!     real(8)                     :: Nlgs
+
+!     ! thomas(a,b,c,d,x,n)
+!     call thomas()
+
 ! end subroutine Line_Gauss_Seidel
 
 ! subroutine SLOR(args)
