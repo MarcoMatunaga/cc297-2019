@@ -30,6 +30,8 @@ program projeto1
             call residue_calc
         else if (which_method == 4) then
             call Line_Gauss_Seidel
+        else if (which_method == 5) then 
+            call SLOR
         end if
 
         call boco_proj1
