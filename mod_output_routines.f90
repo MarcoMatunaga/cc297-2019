@@ -253,7 +253,8 @@ module output_routines_proj1
         character (len=100)             :: fname = '.dat'
         character (len=100)             :: mname
         integer(4)                      :: i,j
-        reaL(8), dimension(imax,jmax)   :: u,v
+        reaL(8), dimension(imax,jmax)   :: u,v,cp_aux
+        real(8), dimension(imax)        :: cp
         real(8)                         :: dx, dy
 
         if (which_method == 1) mname = 'Jacobi' 
@@ -342,6 +343,22 @@ module output_routines_proj1
         end do
       
         close(3)
+        
+        ! calculate cp 
+            do j = 1, 2
+                do i = ILE, ITE
+                    cp_aux(i,j) = 1.0d0 - ( u(i,j)**2.0d0+v(i,j)**2.0d0)/(u_inf**2.0d0)
+                end do 
+            end do 
+
+        open(4,file = trim(mname)//'_cp'//trim(fname))
+            do j = 1, 2
+                do i = ILE, ITE
+                    cp(i) = (cp_aux(i,1) + cp_aux(i,2))/2.0d0
+                    write(4,'(15ES20.10)') cp(i)
+                end do
+            end do 
+        close(4)
 
     end subroutine
    
